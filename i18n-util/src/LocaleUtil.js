@@ -1,10 +1,19 @@
-const LOCALE_COOKIE_KEY = 'okta_user_lang';
+const LOCALE_COOKIE_KEY = 'okta_help_user_lang';
 
 const getLocale = () => {
-  const supportedLocales = [
-    'en',
-    'ja',
-  ];
+  // map to convert locales to folder names within h.o.c
+  const supportedLocaleToFolderMap = {
+    'en-US': 'en',
+    'ja-JP': 'ja',
+  };
+
+  // map to convert locales without country code
+  // Ex en gets converted to en-US
+  const localesWithoutCountryMap = {
+    'en': 'en-US',
+    'ja': 'ja-JP'
+  };
+
   // check locale passed in query param
   let locale = document.location.hash.split('?locale=')[1];
   if (!locale) {
@@ -16,13 +25,23 @@ const getLocale = () => {
       locale = navigator.language;
     }
   }
+  
+  // convert locales without country code
+  // Ex en gets converted to en-US
+  if (localesWithoutCountryMap[locale]) {
+    locale = localesWithoutCountryMap[locale];
+  }
+
+  setLocaleCookie(locale);
+
+  // convert locale value to folder path
+  locale = supportedLocaleToFolderMap[locale];
 
   // default to en
-  if (!supportedLocales.includes(locale)) {
-    console.info('using default locale');
+  if (!locale) {
     locale = 'en';
   }
-  setLocaleCookie(locale);
+  
   return locale;
 };
 

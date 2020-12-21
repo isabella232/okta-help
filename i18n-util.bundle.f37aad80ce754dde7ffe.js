@@ -1,3 +1,10 @@
+/*!
+ * 
+ *       ATTENTION:
+ *       Do not manually edit this file. This file is autogerated.
+ *       Refer i18n-util/readme.md to see how this file is generated.
+ *
+ */
 /*
  * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
  * This devtool is not neither made for production nor for readable output files.
@@ -15,7 +22,7 @@
   \***************************/
 /***/ ((module) => {
 
-eval("const LOCALE_COOKIE_KEY = 'okta_user_lang';\n\nconst getLocale = () => {\n  const supportedLocales = [\n    'en',\n    'ja',\n  ];\n  // check locale passed in query param\n  let locale = document.location.hash.split('?locale=')[1];\n  if (!locale) {\n    // check locale in cookie\n    if (document.cookie.indexOf(LOCALE_COOKIE_KEY) !== -1) {\n      locale = getCookieValue(LOCALE_COOKIE_KEY);\n    } else {\n      // check locale in browser\n      locale = navigator.language;\n    }\n  }\n\n  // default to en\n  if (!supportedLocales.includes(locale)) {\n    console.info('using default locale');\n    locale = 'en';\n  }\n  setLocaleCookie(locale);\n  return locale;\n};\n\nconst getCookieValue = (cookieName) => {\n  var b = document.cookie.match('(^|;)\\\\s*' + cookieName + '\\\\s*=\\\\s*([^;]+)');\n  return b ? b.pop() : '';\n};\n\nconst setLocaleCookie = (locale) => {\n  if (document.cookie.indexOf(LOCALE_COOKIE_KEY) === -1) {\n    document.cookie = `${LOCALE_COOKIE_KEY}=${locale}`;\n  }\n};\n\nmodule.exports = {\n  getLocale,\n  setLocaleCookie\n}; \n\n\n//# sourceURL=webpack://i18n-util/./src/LocaleUtil.js?");
+eval("const LOCALE_COOKIE_KEY = 'okta_help_user_lang';\n\nconst getLocale = () => {\n  // map to convert locales to folder names within h.o.c\n  const supportedLocaleToFolderMap = {\n    'en-US': 'en',\n    'ja-JP': 'ja',\n  };\n\n  // map to convert locales without country code\n  // Ex en gets converted to en-US\n  const localesWithoutCountryMap = {\n    'en': 'en-US',\n    'ja': 'ja-JP'\n  };\n\n  // check locale passed in query param\n  let locale = document.location.hash.split('?locale=')[1];\n  if (!locale) {\n    // check locale in cookie\n    if (document.cookie.indexOf(LOCALE_COOKIE_KEY) !== -1) {\n      locale = getCookieValue(LOCALE_COOKIE_KEY);\n    } else {\n      // check locale in browser\n      locale = navigator.language;\n    }\n  }\n  \n  // convert locales without country code\n  // Ex en gets converted to en-US\n  if (localesWithoutCountryMap[locale]) {\n    locale = localesWithoutCountryMap[locale];\n  }\n\n  setLocaleCookie(locale);\n\n  // convert locale value to folder path\n  locale = supportedLocaleToFolderMap[locale];\n\n  // default to en\n  if (!locale) {\n    locale = 'en';\n  }\n  \n  return locale;\n};\n\nconst getCookieValue = (cookieName) => {\n  var b = document.cookie.match('(^|;)\\\\s*' + cookieName + '\\\\s*=\\\\s*([^;]+)');\n  return b ? b.pop() : '';\n};\n\nconst setLocaleCookie = (locale) => {\n  if (document.cookie.indexOf(LOCALE_COOKIE_KEY) === -1) {\n    document.cookie = `${LOCALE_COOKIE_KEY}=${locale}`;\n  }\n};\n\nmodule.exports = {\n  getLocale,\n  setLocaleCookie\n}; \n\n\n//# sourceURL=webpack://i18n-util/./src/LocaleUtil.js?");
 
 /***/ }),
 

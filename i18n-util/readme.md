@@ -43,7 +43,7 @@ Any time we make changes to src files within `i18n-util`, we need to make sure w
  3. Browser locale
  4. Default to `en`
 
-Once locale is computed, it gets set as a cookie under the key `okta_user_lang`.
+Once locale is computed, it gets set as a cookie under the key `okta_help_user_lang`.
 <!-- localestop -->
 
 
